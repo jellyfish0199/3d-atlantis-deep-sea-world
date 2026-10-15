@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>亚特兰蒂斯 · 深海圣城</title>
+<link rel="stylesheet" href="style.css">
+<link rel="modulepreload" href="vendor/three-kit.js">
+<link rel="modulepreload" href="pets.js">
+<script>
+  // start the model downloads at once, picking the light set on phones (must match LOW in app.js)
+  (function(){ var q = location.search.indexOf('low') >= 0, low = q || matchMedia('(pointer: coarse)').matches || Math.min(innerWidth, innerHeight) < 600 || (navigator.deviceMemory && navigator.deviceMemory <= 4);
+    ['shell', 'tree', 'tripo/poseidon', 'tripo/shell', 'tripo/boat', 'tripo/mermaid', 'tripo/pet0', 'tripo/pet1', 'tripo/pet2', 'tripo/pet3', 'tripo/pet4'].forEach(function(n){ var l = document.createElement('link'); l.rel = 'preload'; l.as = 'fetch'; l.crossOrigin = 'anonymous'; l.href = 'models/' + (low ? 'low/' : '') + n + '.glb'; document.head.appendChild(l); }); })();
+</script>
+<link rel="modulepreload" href="book.js">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.6"/><circle cx="16.5" cy="16" r="2.6"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.6"/><circle cx="16.5" cy="16" r="2.6"/><path d="M3.5 3.5l17 17"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.5-6"/><path d="M3.5 3.8v4.6h4.6"/><circle cx="12" cy="12" r="1.6"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-exit" viewBox="0 0 24 24"><path d="M14 4h4.2a.8.8 0 0 1 .8.8v14.4a.8.8 0 0 1-.8.8H14"/><path d="M10 16l-4-4 4-4"/><path d="M6.2 12H16"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2.8" width="12" height="18.4" rx="2"/><path d="M6 7h12M9.5 11.5c1 2 2 3 4 4l1.2-1.2 1.8 1-.6 1.6c-3.5.2-7-3.3-6.8-6.8l1.6-.6 1 1.8z"/></symbol>
+    <symbol id="i-swing" viewBox="0 0 24 24"><path d="M3 3.5h18M7 3.5v12M17 3.5v12"/><path d="M5.5 15.5h13a3.5 3.5 0 0 1-3.5 3.5H9a3.5 3.5 0 0 1-3.5-3.5z"/></symbol>
+    <symbol id="i-lib" viewBox="0 0 24 24"><path d="M3 9.5L12 4l9 5.5"/><path d="M5 10v8M9.7 10v8M14.3 10v8M19 10v8M3 20.5h18"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5c-2-1.6-5-2-8-1.5v13c3-.5 6-.1 8 1.5 2-1.6 5-2 8-1.5V5c-3-.5-6-.1-8 1.5z"/><path d="M12 6.5v13"/><path d="M17 2.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></symbol>
+    <symbol id="i-holo" viewBox="0 0 24 24"><path d="M5 20.5h14M8 20.5l1.5-3h5l1.5 3"/><path d="M12 14.5c-3-1.5-4-4-3.5-7 .4-2.3 2-3.5 3.5-3.5s3.1 1.2 3.5 3.5c.5 3-.5 5.5-3.5 7z"/><path d="M4.5 8.5h2M17.5 8.5h2M5.5 4.5l1.4 1.4M18.5 4.5l-1.4 1.4"/></symbol>
+    <symbol id="i-paw" viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="4.6" ry="3.8"/><circle cx="6" cy="10.5" r="1.9"/><circle cx="9.6" cy="6.6" r="1.9"/><circle cx="14.4" cy="6.6" r="1.9"/><circle cx="18" cy="10.5" r="1.9"/></symbol>
+    <symbol id="i-river" viewBox="0 0 24 24"><path d="M3 8c3-2.4 6 2.4 9 0s6 2.4 9 0M3 13c3-2.4 6 2.4 9 0s6 2.4 9 0M3 18c3-2.4 6 2.4 9 0s6 2.4 9 0"/></symbol>
+    <symbol id="i-shell" viewBox="0 0 24 24"><path d="M3 17c0-6.5 4-11.5 9-11.5S21 10.5 21 17z"/><path d="M12 17V6M12 17l-5.2-9.3M12 17l5.2-9.3M12 17L4 12M12 17l8-5"/><path d="M5.5 20h13"/></symbol>
+    <symbol id="i-boat" viewBox="0 0 24 24"><path d="M2.5 14.5h19c-1.4 3.6-4.6 5.5-9.5 5.5s-8.1-1.9-9.5-5.5z"/><circle cx="8.6" cy="11.4" r="2.4"/><circle cx="15.4" cy="11.4" r="2.4"/><circle cx="12" cy="6.4" r="2.4"/></symbol>
+    <symbol id="i-trident" viewBox="0 0 24 24"><path d="M12 22V5M12 2.5l-1.6 3h3.2zM6 4v4.5a6 6 0 0 0 12 0V4"/><path d="M6 4l-1.2 2M18 4l1.2 2M9.5 17.5h5"/></symbol>
+          </defs>
+</svg>
+<canvas id="c" tabindex="0"></canvas>
+<div id="vignette"></div>
+<div id="ui">
+  <div class="title"><div class="t1">亚特兰蒂斯 · 深海圣城</div><div class="t2">ATLANTIS · THE DEEP SANCTUM</div></div>
+  <div class="panel tr">
+    <div class="seg" id="modeSeg"><button data-mode="orbit" class="on">浏览</button><button data-mode="fp">漫游</button></div>
+    <div class="rail" id="rail">
+      <button class="icon" id="musicBtn" aria-label="音乐开关" title="音乐"><svg class="on-i"><use href="#i-note"/></svg><svg class="off-i"><use href="#i-mute"/></svg></button>
+      <button class="icon" id="resetBtn" aria-label="复位视角" title="复位视角"><svg><use href="#i-reset"/></svg></button>
+    </div>
+  </div>
+  <div class="panel bc">
+    <div class="seg" id="timeSeg">
+      <button data-t="morning" class="on">清晨</button><button data-t="dusk">黄昏</button><button data-t="night">夜晚</button><button data-t="storm">暴风雷雨</button>
+    </div>
+  </div>
+  <div id="hint"></div>
+  <aside id="guide">
+    <button id="guideToggle" aria-expanded="false"><svg class="gi"><use href="#i-compass"/></svg><span>探索指引</span><svg class="chev"><use href="#i-chev"/></svg></button>
+    <div id="guideBody">
+      <div id="guideList">
+        <button data-go="booth"><svg><use href="#i-phone"/></svg><span><b>神秘海底电话亭</b><small>拿起听筒，那头有人在等</small></span></button>
+        <button data-go="garden"><svg><use href="#i-swing"/></svg><span><b>浪漫秋千</b><small>水晶珊瑚下，荡向蓝色河流</small></span></button>
+        <button data-go="library"><svg><use href="#i-lib"/></svg><span><b>图书馆</b><small>推开圣殿大门，走进书海</small></span></button>
+        <button data-go="book"><svg><use href="#i-book"/></svg><span><b>潮汐之书</b><small>一本会说话的古书</small></span></button>
+        <button data-go="holo"><svg><use href="#i-holo"/></svg><span><b>人鱼全息虚影</b><small>点她，她会为你唱歌</small></span></button>
+        <button data-go="pets"><svg><use href="#i-paw"/></svg><span><b>深海萌物随宠</b><small>广场两侧水池里的五只萌宠</small></span></button>
+        <div class="chips" id="petChips"></div>
+        <button data-go="statue"><svg><use href="#i-trident"/></svg><span><b>海神波塞冬雕像</b><small>广场中央的守护者</small></span></button>
+        <button data-go="river"><svg><use href="#i-river"/></svg><span><b>梦幻河流</b><small>平时是蓝色 · 点河水换成粉色或极光</small></span></button>
+        <div class="chips" id="riverChips"></div>
+        <button data-go="shell0"><svg><use href="#i-shell"/></svg><span><b>秘密贝壳</b><small>敲开贝壳，带走一段记忆</small></span></button>
+        <div class="chips" id="shellChips"></div>
+        <button data-go="boat"><svg><use href="#i-boat"/></svg><span><b>猫糕小船</b><small>右边河上，三只猫糕在等你</small></span></button>
+        <div class="chips" id="boatChips"></div>
+      </div>
+    </div>
+  </aside>
+  <div id="cross"></div>
+  <div id="lockTip">点击画面锁定视角 · 也可按住拖拽环顾</div>
+  <div id="prompt"></div>
+  <div id="bubbles"></div>
+  <button id="libExit" class="pill"><svg><use href="#i-exit"/></svg><span>回到门外大厅</span></button>
+  <div id="joy"><div id="knob"></div></div>
+  <div id="swingBar"><button class="pill" id="swingExit">离开秋千</button></div>
+  <div id="shellCard" aria-hidden="true">
+    <div class="sc-pop"><div class="sc-card" id="scTilt" title="点击图片保存到相册"><img id="scImg" alt="" draggable="false"><i class="sc-foil"></i><i class="sc-glare"></i></div></div>
+    <div class="sc-cap"><b id="scTtl"></b><small id="scSub"></small></div>
+    <div class="sc-row"><button class="pill" id="scSave">保存到相册</button><button class="pill" id="scClose">合上贝壳</button></div>
+    <div class="sc-tip">晃一晃手机，或移动鼠标看看 · 点击图片即可保存</div>
+    <div id="scToast"></div>
+  </div>
+  <div id="dlg">
+    <div class="dlg-head"><span class="dot"></span><span class="ttl" id="dlgTtl">深海电话亭</span><button id="hang">挂断</button></div>
+    <div id="dlgLog"></div>
+    <div id="dlgOpts"></div>
+    <div id="dlgInput"><textarea id="msg" rows="2" maxlength="200" placeholder="写下你想寄出去的心事……"></textarea><button id="send">寄出</button></div>
+  </div>
+</div>
+<div id="loader">
+  <div class="lt">亚特兰蒂斯 · 深海圣城</div><div class="ls">ATLANTIS · THE DEEP SANCTUM</div>
+  <div class="track"><div id="ldBar"></div></div>
+  <div class="lrow"><span id="ldTxt">正在潜入深海……</span><span id="ldPct">0%</span></div>
+  <i class="bub" style="left:12%;animation-delay:-1s"></i><i class="bub" style="left:28%;animation-delay:-4s;width:5px;height:5px"></i><i class="bub" style="left:61%;animation-delay:-2.5s"></i><i class="bub" style="left:83%;animation-delay:-5s;width:6px;height:6px"></i>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
